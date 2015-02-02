@@ -24,10 +24,7 @@ class Game:
             exact += 1
 
         secretCount = Counter(secret)
+        guessCount = Counter(guess)
 
-        inexact = 0
-        for g in guess:
-            if secretCount[g] > 0:
-                secretCount[g] -= 1
-                inexact += 1
+        inexact = sum(min(guessCount[k], secretCount[k]) for k in guessCount)
         return exact, inexact
